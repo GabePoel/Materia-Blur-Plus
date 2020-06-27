@@ -25,6 +25,14 @@ def move(name, root=False):
         tardir = usrdir
     os.system(prefix + "mvdir '" + os.path.join(insdir, name) + "' " + tardir)
     
+def copy(name, root=False):
+    prefix = ""
+    tardir = locdir
+    if root:
+        prefix = "sudo "
+        tardir = usrdir
+    os.system(prefix + "cp -r '" + os.path.join(insdir, name) + "' " + tardir)
+    
 themes = ["Materia-Blur-Plus"]
 
 if len(sys.argv) == 1:
@@ -39,5 +47,7 @@ for theme in themes:
         link(theme, atroot)
     elif sys.argv[1] == "move":
         move(theme, atroot)
+    elif sys.argv[1] == "copy":
+        copy(theme, atroot)
     else:
         raise ValueError("Invalid input provided.\nPlease specify either 'link' or 'move'.")
